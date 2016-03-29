@@ -4,6 +4,8 @@
 // jsdom is a pure JS DOM implementation that runs in Node.
 
 import jsdom from 'jsdom';
+import chai from 'chai';
+import chaiImmutable from 'chai-immutable';
 
 // Create jsdom versions of document and window objects
 const doc = jsdom.jsdom('<!doctype html><html><body></body></html>');
@@ -20,3 +22,5 @@ Object.keys(window).forEach((key) => {
           global[key] = window[key];
             }
 });
+
+chai.use(chaiImmutable);
