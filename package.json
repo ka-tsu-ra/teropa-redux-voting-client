@@ -11,8 +11,10 @@
   "author": "",
   "license": "ISC",
   "babel": {
-  "presets": ["es2015"]
-},
+    "presets": [
+      "es2015"
+    ]
+  },
   "devDependencies": {
     "babel-core": "^6.7.4",
     "babel-loader": "^6.2.4",
@@ -29,6 +31,7 @@
   "dependencies": {
     "immutable": "^3.7.6",
     "react": "^0.14.8",
+    "react-addons-test-utils": "^0.14.8",
     "react-dom": "^0.14.8"
   }
 }
