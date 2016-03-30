@@ -1,7 +1,7 @@
 // This file is the app's entry point file.
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Voting from './components/Voting';
+import Voting from './components/Voting.jsx';
 
 const pair = ['Trainspotting', '28 Days Later'];
 
