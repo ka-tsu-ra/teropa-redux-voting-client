@@ -15,3 +15,5 @@ export default React.createClass({
     </div>);
   }
 });
+// does the component receive the server side function 'vote' through this code? 
+// onClick is somehow triggering that function with the entry as the argument?
