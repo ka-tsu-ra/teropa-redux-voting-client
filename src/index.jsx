@@ -2,14 +2,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, hashHistory } from 'react-router';
+import App from './components/App.jsx';
 import Voting from './components/Voting.jsx';
+import Results from './components/Results.jsx';
 
 // Declaratively define a routing table using the React component called Route.
 // Point to the App component for the root Route in the config, which will be shared for 
 // all the concrete routes within. App component purpose is to rener all markup that is common 
 // accross all routes.
- 
+// Specify that for path named '/results', the Results component should be used 
+
 const routes = <Route component={App}>
+  <Route path="/results" component={Results} />
   <Route path="/" component={Voting} />
 </Route>;
 
