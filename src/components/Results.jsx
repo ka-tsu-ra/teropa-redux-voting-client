@@ -14,19 +14,25 @@ export default React.createClass({
     }
     return 0;    
   },
-  // For each 'entry' in this.props.pair, make a div with the entry name as its key, className 'entry',
-  // display the entry name as an h1,
-  // make a div with className 'voteCount' and display the number in this.props.tally for that entry.
   render: function() {
     return <div className="results">
-      {this.getPair().map(entry =>
-        <div key={entry} className="entry">
-          <h1>{entry}</h1>                             
-          <div className="voteCount">
-            {this.getVotes(entry)}
+      <div className="tally">
+        {this.getPair().map(entry =>
+          <div key={entry} className="entry">
+            <h1>{entry}</h1>                             
+            <div className="voteCount">
+              {this.getVotes(entry)}
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
+      <div className="management">
+        <button ref="next"
+                className="next"
+                onClick={this.props.next}>
+          Next
+        </button>
+      </div>
     </div>;
   }
 });
