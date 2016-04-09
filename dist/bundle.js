@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "e6e87c9b0bdaddcca4f7"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "77abf1b98da0500ce0fd"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -33138,21 +33138,23 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	// Don't use pure render mixin in App component. It would cause route changes not to fire. (At time of
-	// the blog, there was implementation issue between the router and React).
-
-	// Moved this over from index.jsx
-	var pair = _immutable.List.of('Trainspotting', '28 Days Later');
-
 	// This component only renders its child components, expected to be given in as the 'children' prop.
 	// React Router does this - it plugs in component(s) defined for whatever the current route happens to be.
 	// Currently only defined one route for Voting, so at the moment the App component will always render Voting.
+
+	var pair = _immutable.List.of('Trainspotting', '28 Days Later');
+
+	// Temporary hardcoded tally const to be rendered by the results component being written.
+	var tally = Map({ 'Trainspotting': 5, '28 Days Later': 4 });
 
 	exports.default = _react2.default.createClass({
 	  displayName: 'App',
 
 	  render: function render() {
-	    return _react2.default.cloneElement(this.props.children, { pair: pair });
+	    return _react2.default.cloneElement(this.props.children, {
+	      pair: pair,
+	      tally: tally
+	    });
 	  }
 	});
 
@@ -38541,11 +38543,42 @@
 	  displayName: 'Results',
 
 	  mixins: [_reactAddonsPureRenderMixin2.default],
+	  getPair: function getPair() {
+	    return this.props.pair || [];
+	    // currently getting this from hardcoded const pair in App.jsx
+	  },
+	  getVotes: function getVotes(entry) {
+	    if (this.props.tally & this.props.tally.has(entry)) {
+	      return this.props.tally.get(entry);
+	      // tally prop is currently hardcoded into App.jsx
+	    }
+	    return 0;
+	  },
+	  // For each 'entry' in this.props.pair, make a div with the entry name as its key, className 'entry',
+	  // display the entry name as an h1,
+	  // make a div with className 'voteCount' and display the number in this.props.tally for that entry.
 	  render: function render() {
+	    var _this = this;
+
 	    return _react2.default.createElement(
 	      'div',
-	      null,
-	      'Hello from results!'
+	      { className: 'results' },
+	      this.getPair().map(function (entry) {
+	        return _react2.default.createElement(
+	          'div',
+	          { key: entry, className: 'entry' },
+	          _react2.default.createElement(
+	            'h1',
+	            null,
+	            entry
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'voteCount' },
+	            _this.getVotes(entry)
+	          )
+	        );
+	      })
 	    );
 	  }
 	});
