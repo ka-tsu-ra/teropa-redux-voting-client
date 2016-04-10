@@ -1,10 +1,13 @@
 // This file is the app's entry point file.
 // Set up the store here because it's the entry point.
+// Wrap top level app component inside a react-redux Provider component to connect component tree to Redux store.
+// Put Provider in around Router componenet so Provider is ancestor to all application components.
 
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, hashHistory } from 'react-router';
 import { createStore } from 'redux';
+import { Provider } from 'react-redux';
 import reducer from './reducer.jsx';
 import App from './components/App.jsx';
 import Voting from './components/Voting.jsx';
@@ -36,6 +39,8 @@ const routes = <Route component={App}>
 // eaiser to add more routes.
 
 ReactDOM.render(
-  <Router history={hashHistory}>{routes}</Router>,
+  <Provider store={store}>
+    <Router history={hashHistory}>{routes}</Router>
+  </Provider>,
   document.getElementById('app')
 );
