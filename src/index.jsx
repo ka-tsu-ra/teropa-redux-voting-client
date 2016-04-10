@@ -2,6 +2,7 @@
 // Set up the store here because it's the entry point.
 // Wrap top level app component inside a react-redux Provider component to connect component tree to Redux store.
 // Put Provider in around Router componenet so Provider is ancestor to all application components.
+// Update routing table to use VotingContainer instead of Voting. That gets data from Redux store into UI.
 
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -10,6 +11,7 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import reducer from './reducer.jsx';
 import App from './components/App.jsx';
+import { VotingContainer } from './components/Voting';
 import Voting from './components/Voting.jsx';
 import Results from './components/Results.jsx';
 
@@ -28,7 +30,7 @@ store.dispatch({
 });
 const routes = <Route component={App}>
   <Route path="/results" component={Results} />
-  <Route path="/" component={Voting} />
+  <Route path="/" component={VotingContainer} />
 </Route>;
 
 // Supply the Router component from react-router package as root component of application, instaed of
